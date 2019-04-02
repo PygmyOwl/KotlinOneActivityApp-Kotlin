@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KotlinOneActivityApp</string>
+    <string name="_3_points">+3 POINTS</string>
+    <string name="_3_pointsB">+3 POINTS</string>
+    <string name="free_throw">FREE THROW</string>
+    <string name="reset">RESET</string>
+    <string name="_2_points">+2 POINTS</string>
+    <string name="_2_pointsB">+2 POINTS</string>
+    <string name="free_throwB">FREE THROW</string>
+    <string name="team_a">Team A</string>
+    <string name="_0">0</string>
+    <string name="team_b">Team B</string>
+    <string name="_0B">0</string>
+</resources>
