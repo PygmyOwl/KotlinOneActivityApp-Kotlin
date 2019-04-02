@@ -8,8 +8,8 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    var teamAScore: Int = 0
-    var teamBScore: Int = 0
+    private var teamAScore: Int = 0
+    private var teamBScore: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,54 +17,55 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun add3ToTeamA(view: View)  {
-        teamAScore = teamAScore + 3
-        showPoints(1, teamAScore)
+        addAndShowPoints(1, 3)
     }
 
     fun add2ToTeamA(view: View) {
-        teamAScore = teamAScore + 2
-        showPoints(1, teamAScore)
+        addAndShowPoints(1, 2)
     }
 
     fun addFreeThrowToTeamA(view: View) {
-        teamAScore = teamAScore + randomizer()
-        showPoints(1, teamAScore)
+        addAndShowPoints(1, randomizer())
     }
 
     fun add3ToTeamB(view: View) {
-        teamBScore = teamBScore + 3
-        showPoints(2, teamBScore)
+        addAndShowPoints(2, 3)
     }
 
     fun add2ToTeamB(view: View) {
-        teamBScore = teamBScore + 2
-        showPoints(2, teamBScore)
+        addAndShowPoints(2, 2)
     }
 
     fun addFreeThrowToTeamB(view: View) {
-        teamBScore = teamBScore + randomizer()
-        showPoints(2, teamBScore)
+        addAndShowPoints(2, randomizer())
     }
+
+
 
     fun resetScore(view: View) {
         teamAScore = 0
-        showPoints(1, teamAScore)
         teamBScore = 0
-        showPoints(2, teamBScore)
+        addAndShowPoints(1, 0)
+        addAndShowPoints(2, 0)
     }
 
-    protected fun showPoints (flag: Int, points: Int) {
+    private fun addAndShowPoints (flag: Int, value: Int) {
         var teamScore = findViewById<TextView>(R.id.TeamAScore)
+        var points = 0
         if (flag == 1) {
+            teamAScore += value
+            points = teamAScore
             teamScore = findViewById(R.id.TeamAScore)
         } else if (flag == 2) {
+            teamBScore += value
+            points = teamBScore
             teamScore = findViewById(R.id.TeamBScore)
         }
         val scoreInString = "" + points
         teamScore.setText(scoreInString)
     }
 
-    protected fun randomizer() : Int {
+    private fun randomizer() : Int {
         val randomNum: Int = Random.nextInt(4)
         return randomNum
     }
