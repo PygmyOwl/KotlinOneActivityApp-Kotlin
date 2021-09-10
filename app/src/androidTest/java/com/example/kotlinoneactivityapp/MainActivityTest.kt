@@ -28,7 +28,7 @@ class MainActivityTest {
     private var freeThrowPoints = 0
     private var numBeforeClick  = 0
 
-    fun checkDefaultState() {
+    private fun checkDefaultState() {
         entityProcessor.checkSymbolsArePresent("Team A")
         entityProcessor.checkSymbolsArePresent("Team B")
         entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
@@ -86,6 +86,13 @@ class MainActivityTest {
         }
     }
 
+    private fun checkRandomizerBounds() {
+        Log.d("MyApp", "" + freeThrowPoints)
+        if (freeThrowPoints !in 0..3) {
+            entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
+        }
+    }
+
     @Test
     fun checkFreeAThrow() {
         checkDefaultState()
@@ -96,10 +103,7 @@ class MainActivityTest {
             getNumFromTV(1)
             numAfterClick = numFromTV
             freeThrowPoints = numAfterClick - numBeforeClick
-            Log.d("MyApp", "" + freeThrowPoints)
-            if (freeThrowPoints < 0 && freeThrowPoints > 3) {
-                entityProcessor.checkSymbolsOnElement(R.id.TeamBScore, "0")
-            }
+            checkRandomizerBounds()
         }
     }
 
@@ -112,10 +116,7 @@ class MainActivityTest {
             getNumFromTV(2)
             numAfterClick = numFromTV
             freeThrowPoints = numAfterClick - numBeforeClick
-            Log.d("MyApp", "" + freeThrowPoints)
-            if (freeThrowPoints < 0 && freeThrowPoints > 3) {
-                entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
-            }
+            checkRandomizerBounds()
         }
     }
 
