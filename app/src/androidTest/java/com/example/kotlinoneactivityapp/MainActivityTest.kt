@@ -28,7 +28,7 @@ class MainActivityTest {
     private var freeThrowPoints = 0
     private var numBeforeClick  = 0
 
-    fun checkDefaultState() {
+    private fun checkDefaultState() {
         entityProcessor.checkSymbolsArePresent("Team A")
         entityProcessor.checkSymbolsArePresent("Team B")
         entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
@@ -86,37 +86,35 @@ class MainActivityTest {
         }
     }
 
-    @Test
-    fun checkFreeAThrow() {
-        checkDefaultState()
+    private fun checkRandomizerBounds() {
+        Log.d("MyApp", "" + freeThrowPoints)
+        if (freeThrowPoints !in 0..3) {
+            entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
+        }
+    }
+
+    private fun runFreeThrows(ButtonID: Int, teamNumber: Int) {
         for (i in 0..30) {
-            getNumFromTV(1)
+            getNumFromTV(teamNumber)
             numBeforeClick = numFromTV
-            entityInteractor.clickOnButtonWithID(R.id.freeAthrow)
-            getNumFromTV(1)
+            entityInteractor.clickOnButtonWithID(ButtonID)
+            getNumFromTV(teamNumber)
             numAfterClick = numFromTV
             freeThrowPoints = numAfterClick - numBeforeClick
-            Log.d("MyApp", "" + freeThrowPoints)
-            if (freeThrowPoints < 0 && freeThrowPoints > 3) {
-                entityProcessor.checkSymbolsOnElement(R.id.TeamBScore, "0")
-            }
+            checkRandomizerBounds()
         }
     }
 
     @Test
+    fun checkFreeAThrow() {
+        checkDefaultState()
+        runFreeThrows(R.id.freeAthrow, 1)
+    }
+
+    @Test
     fun checkFreeBThrow() {
-        for (i in 0..30) {
-            getNumFromTV(2)
-            numBeforeClick = numFromTV
-            entityInteractor.clickOnButtonWithID(R.id.freeBthrow)
-            getNumFromTV(2)
-            numAfterClick = numFromTV
-            freeThrowPoints = numAfterClick - numBeforeClick
-            Log.d("MyApp", "" + freeThrowPoints)
-            if (freeThrowPoints < 0 && freeThrowPoints > 3) {
-                entityProcessor.checkSymbolsOnElement(R.id.TeamAScore, "0")
-            }
-        }
+       checkDefaultState()
+        runFreeThrows(R.id.freeBthrow, 2)
     }
 
 }
