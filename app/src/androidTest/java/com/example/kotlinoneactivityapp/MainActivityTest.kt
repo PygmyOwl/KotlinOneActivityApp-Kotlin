@@ -16,7 +16,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 @RunWith(AndroidJUnit4::class)
 
 class MainActivityTest {
-
+    // just for commit
     @get:Rule
     var mActivityTestRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
