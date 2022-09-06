@@ -6,7 +6,8 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
-      - name: Set up JDK 1.8
+
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 11
@@ -25,5 +26,5 @@ jobs:
           api-level: 30
           target: default
           arch: x86
-          profile: Nexus 6
+          profile: Pixel 2 API 30
           script: ./gradlew connectedCheck --stacktrace
