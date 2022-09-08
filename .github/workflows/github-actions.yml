@@ -22,8 +22,9 @@ jobs:
 
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
-        continue-on-error: true
+#        continue-on-error: true
         with:
           emulator-build: 7425822
           api-level: 30
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
