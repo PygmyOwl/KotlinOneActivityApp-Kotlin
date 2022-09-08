@@ -27,7 +27,7 @@ jobs:
         with:
           emulator-build: 7425822
           api-level: 30
-          target: default
+          target: google-apis
           arch: x86
           profile: Pixel_2_API_30
           force-avd-creation: false
