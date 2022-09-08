@@ -33,3 +33,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
+
+//task launchEmuAndExecuteTests() {
+//    println "Task was launched"
+////    dependsOn 'task.app.installDebug'
+//    doLast {
+//        exec {
+//
+//            workingDir '/Users/serhiiabdiushev/StudioProjects/KotlinOneActivityApp-Kotlin'
+//            commandLine './gradlew', 'app:installDebug', '--stacktrace'
+////            commandLine './gradlew', 'app:installDebug'
+//        }
+//    }
+//}
