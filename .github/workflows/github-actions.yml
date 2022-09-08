@@ -3,10 +3,6 @@ on: [push]
 jobs:
   Test-Execution-Exercise:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        api-level: [28,29,30]
-        target: [default, google_apis]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -27,8 +23,5 @@ jobs:
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: &{{ matrix.api-level }}
-          target: &{{ matrix.target }}
-          arch: x86_64
-          profile: Pixel 4
+          api-level: 30
           script: ./gradlew connectedCheck --stacktrace
