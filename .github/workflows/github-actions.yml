@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
       - name: Build the app
         run: ./gradlew assembleDebug
 
@@ -29,10 +30,11 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
 #        continue-on-error: true
         with:
-          emulator-build: 7425822
-          api-level: 30
-          target: google_apis
-          arch: x86
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          profile: SnappAA_API_30
+#          emulator-build: 7425822
+#          api-level: 30
+#          target: google_apis
+#          arch: x86
+#          force-avd-creation: false
+#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
