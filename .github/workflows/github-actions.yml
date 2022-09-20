@@ -17,7 +17,7 @@ jobs:
           java-version: 11
 
       - name: CPU checker
-        - uses: sudo apt install cpu-checker
+        run: sudo apt-get install cpu-checker
 
 #      - name: Build the app
 #        run: ./gradlew assembleDebug
