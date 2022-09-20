@@ -21,6 +21,8 @@ jobs:
 
       -name: kvm-ok run
        run: kvm-ok
+
+#       something went wrong
 #      - name: Build the app
 #        run: ./gradlew assembleDebug
 
