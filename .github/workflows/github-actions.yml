@@ -19,6 +19,8 @@ jobs:
       - name: CPU checker
         run: sudo apt-get install -y cpu-checker
 
+      -name: kvm-ok run
+       run: kvm-ok
 #      - name: Build the app
 #        run: ./gradlew assembleDebug
 
