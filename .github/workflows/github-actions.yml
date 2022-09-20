@@ -6,7 +6,7 @@ on:
     branches: [master]
 jobs:
   Test-Execution-Exercise:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
