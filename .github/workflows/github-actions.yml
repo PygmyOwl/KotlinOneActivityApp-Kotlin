@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [master]
 jobs:
+  build:
+    strategy:
+      matrix:
+        os:[ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
   Test-Execution-Exercise:
     runs-on: ubuntu-latest
     steps:
@@ -16,33 +21,25 @@ jobs:
         with:
           java-version: 11
 
-      - name: CPU checker
-        run: sudo apt-get install -y cpu-checker
+      - name: Build the app
+        run: ./gradlew assembleDebug
 
-#      - name: kvm-ok run
-#       run: kvm-ok
+      - name: Upload apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: debug apk
+          path: app/build/outputs/apk/debug/app-debug.apk
 
-#      - name: Build the app
-#        run: ./gradlew assembleDebug
-
-#      - name: Upload apk
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: debug apk
-#          path: app/build/outputs/apk/debug/app-debug.apk
-
-
-
-#      - name: Instrumentation Tests
-#        id: testing
-#        uses: reactivecircus/android-emulator-runner@v2
-##        continue-on-error: true
-#        with:
-#          profile: SnappAA_API_30
-##          emulator-build: 7425822
-##          api-level: 30
-##          target: google_apis
-##          arch: x86
-##          force-avd-creation: false
-##          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
-#          script: ./gradlew connectedCheck --stacktrace
+      - name: Instrumentation Tests
+        id: testing
+        uses: reactivecircus/android-emulator-runner@v2
+#        continue-on-error: true
+        with:
+          profile: SnappAA_API_30
+#          emulator-build: 7425822
+#          api-level: 30
+#          target: google_apis
+#          arch: x86
+#          force-avd-creation: false
+#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          script: ./gradlew connectedCheck --stacktrace
