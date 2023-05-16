@@ -10,7 +10,6 @@ jobs:
       version: [10, 12, 14]
       os: ubuntu-latest
   Test-Execution-Exercise:
-    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
