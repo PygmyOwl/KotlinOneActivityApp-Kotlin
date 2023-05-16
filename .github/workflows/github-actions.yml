@@ -36,6 +36,6 @@ jobs:
           arch: x86
           cores: 4
           ram-size: 4096
-          force-avd-creation: false
+          force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
