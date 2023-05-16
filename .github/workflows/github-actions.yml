@@ -4,12 +4,10 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+
 jobs:
-  build:
-    strategy:
-      version: [10, 12, 14]
-      os: ubuntu-latest
   Test-Execution-Exercise:
+    runs on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
