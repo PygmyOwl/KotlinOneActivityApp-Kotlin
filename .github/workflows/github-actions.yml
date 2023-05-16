@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         versions:
-          os : [ubuntu-latest, macos-latest]
+          os : ubuntu-latest
     runs-on: ${{ matrix.os }}
 #  Test-Execution-Exercise:
 #    runs-on: ubuntu-latest
