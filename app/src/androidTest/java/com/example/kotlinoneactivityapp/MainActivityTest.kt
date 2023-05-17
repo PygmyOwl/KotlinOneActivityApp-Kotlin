@@ -16,7 +16,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 @RunWith(AndroidJUnit4::class)
 
 class MainActivityTest {
-
+    // just for commit
     @get:Rule
     var mActivityTestRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
@@ -80,7 +80,7 @@ class MainActivityTest {
         } else if (flag == 2) {
             scoreID = R.id.TeamBScore
         }
-        onView(withId(scoreID)).check { view, noViewFoundException ->
+        onView(withId(scoreID)).check { view, _ ->
             val score = (view as TextView).text.toString()
             numFromTV = Integer.parseInt(score)
         }
