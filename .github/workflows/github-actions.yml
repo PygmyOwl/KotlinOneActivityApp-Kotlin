@@ -39,8 +39,8 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86
-#          cores: 4
-#          ram-size: 4096
-#          force-avd-creation: true
+          cores: 4
+          ram-size: 4096
+          force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
