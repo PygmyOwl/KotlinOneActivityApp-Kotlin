@@ -39,7 +39,7 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86
-#          cores: 6
+          cores: 6
 #          ram-size: 6144
 #          heap-size: 1024
 #          disk-size: 4086
