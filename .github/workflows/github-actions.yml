@@ -36,16 +36,15 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         continue-on-error: false
         with:
-          profile: API_32_6Gb
-#          api-level: 30
+          api-level: 30
 #          target: google_apis
 #          arch: x86
 #          cores: 6
 #          ram-size: 6144
 #          heap-size: 1024
 #          disk-size: 4086
-#          disable-animations: true
-#          enable-hw-keyboard: false
-#          force-avd-creation: false
-#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          disable-animations: true
+          enable-hw-keyboard: false
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
