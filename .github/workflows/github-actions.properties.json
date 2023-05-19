@@ -1,0 +1,8 @@
+{
+  "name": "Android CI Workflow",
+  "description": "Project for learning of pipelines",
+  "iconName": "octicon device-mobile-16",
+  "categories": [
+    "Testing"
+  ]
+}
