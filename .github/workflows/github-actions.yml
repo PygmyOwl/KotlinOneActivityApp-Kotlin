@@ -37,7 +37,7 @@ jobs:
         continue-on-error: false
         with:
           api-level: 30
-#          target: google_apis
+          target: google_apis
 #          arch: x86
 #          cores: 6
 #          ram-size: 6144
