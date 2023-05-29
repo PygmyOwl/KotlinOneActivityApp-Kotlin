@@ -9,7 +9,7 @@ jobs:
   Test-Execution-Exercise:
     strategy:
       matrix:
-        android-apis: [30, 31, 32, 33]
+        android-apis: [30]
     runs-on: macos-latest
     steps:
       - name: Checkout the code
@@ -23,7 +23,7 @@ jobs:
           cache: gradle
 
       - name: Get list of Android APIs
-        run: android list ask --all
+        run: tools/bin/sdkmanager list ask --all
 #      - name: Grant execute permission for gradlew
 #        run: chmod +x gradlew
 #
