@@ -47,13 +47,13 @@ jobs:
         with:
           api-level: ${{ matrix.android-apis }}
 #          target: google_apis
-#          arch: x86
+          arch: x86_64
 #          cores: 6
 #          ram-size: 6144
 #          heap-size: 1024
 #          disk-size: 4086
 #          disable-animations: true
 #          enable-hw-keyboard: false
-#          force-avd-creation: true
+          force-avd-creation: true
 #          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
 #          script: ./gradlew connectedCheck --stacktrace
