@@ -57,5 +57,5 @@ jobs:
 #          disable-animations: true
 #          enable-hw-keyboard: false
           force-avd-creation: true
-#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
-#          script: ./gradlew connectedCheck --stacktrace
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          script: ./gradlew connectedCheck --stacktrace
