@@ -8,7 +8,7 @@ on:
 jobs:
   Test-Execution-Exercise:
     strategy:
-      matrix-android:
+      matrix:
         android-apis: [30, 31, 32, 33]
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         continue-on-error: false
         with:
-          api-level: ${{ matrix-android.android-apis }}
+          api-level: ${{ matrix.android-apis }}
           target: google_apis
 #          arch: x86
 #          cores: 6
