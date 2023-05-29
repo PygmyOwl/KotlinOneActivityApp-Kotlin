@@ -28,6 +28,12 @@ jobs:
       - name: Assemble app debug variant
         run: ./gradlew assembleDebug
 
+      - name: ADB kill server
+        run: adb kill-server
+
+      - name: ADB start server
+        run: adb start-server
+
       - name: Upload apk
         uses: actions/upload-artifact@v2
         with:
