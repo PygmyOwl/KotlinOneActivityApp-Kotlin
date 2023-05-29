@@ -34,6 +34,9 @@ jobs:
       - name: ADB start server
         run: adb start-server
 
+      - name: Display devices
+        run: adb devices
+
       - name: Upload apk
         uses: actions/upload-artifact@v2
         with:
