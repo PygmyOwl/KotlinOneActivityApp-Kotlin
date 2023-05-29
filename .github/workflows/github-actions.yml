@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         android-apis: [30, 31, 32, 33]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
