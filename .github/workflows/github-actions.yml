@@ -9,7 +9,7 @@ jobs:
   Test-Execution-Exercise:
     strategy:
       matrix:
-        android-apis: [31]
+        android-apis: [30]
     runs-on: macos-latest
     steps:
       - name: Checkout the code
