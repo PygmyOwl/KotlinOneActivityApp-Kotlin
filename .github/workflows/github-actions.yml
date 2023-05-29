@@ -22,32 +22,34 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Assemble app debug variant
-        run: ./gradlew assembleDebug
-
-      - name: Upload apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: debug apk
-          path: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Run UI tests
-        id: testing
-        uses: reactivecircus/android-emulator-runner@v2
-        continue-on-error: false
-        with:
-          api-level: ${{ matrix.android-apis }}
-          target: google_apis
+      - name: Get list of Android APIs
+        run: android list ask --all
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#
+#      - name: Assemble app debug variant
+#        run: ./gradlew assembleDebug
+#
+#      - name: Upload apk
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: debug apk
+#          path: app/build/outputs/apk/debug/app-debug.apk
+#
+#      - name: Run UI tests
+#        id: testing
+#        uses: reactivecircus/android-emulator-runner@v2
+#        continue-on-error: false
+#        with:
+#          api-level: ${{ matrix.android-apis }}
+#          target: google_apis
 #          arch: x86
 #          cores: 6
 #          ram-size: 6144
 #          heap-size: 1024
 #          disk-size: 4086
-          disable-animations: true
-          enable-hw-keyboard: false
-          force-avd-creation: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
-          script: ./gradlew connectedCheck --stacktrace
+#          disable-animations: true
+#          enable-hw-keyboard: false
+#          force-avd-creation: true
+#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+#          script: ./gradlew connectedCheck --stacktrace
