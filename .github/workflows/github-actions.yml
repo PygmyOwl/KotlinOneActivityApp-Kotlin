@@ -8,11 +8,9 @@ on:
 jobs:
   Test-Execution-Exercise:
     strategy:
-      matrix:
-        os: [ ubuntu-22.04, ubuntu-20.04 ]
-        version: [ 10, 12, 14 ]
-    runs-on: ${{ matrix.os }}
-#    runs-on: macos-latest
+      matrix-android:
+        android-apis: [30, 31, 32, 33]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -41,7 +39,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         continue-on-error: false
         with:
-          api-level: 30
+          api-level: ${{ matrix-android.android-apis }}
           target: google_apis
 #          arch: x86
 #          cores: 6
