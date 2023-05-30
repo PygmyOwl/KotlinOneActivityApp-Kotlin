@@ -48,7 +48,6 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         continue-on-error: false
         with:
-          disable-linux-hw-accel: true
           emulator-build: 6110076
           api-level: ${{ matrix.android-apis }}
           target: google_apis
