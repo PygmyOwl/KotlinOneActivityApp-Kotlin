@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Android CI
 on:
   push:
     branches: [master]
@@ -7,18 +7,35 @@ on:
 
 jobs:
   Test-Execution-Exercise:
+    strategy:
+      matrix:
+        android-apis: [30]
     runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: '11'
+          distribution: 'temurin'
+#          cache: gradle
 
-      - name: Build the app
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Assemble app debug variant
         run: ./gradlew assembleDebug
+
+      - name: ADB kill server
+        run: adb kill-server
+
+      - name: ADB start server
+        run: adb start-server
+
+      - name: Display devices
+        run: adb devices
 
       - name: Upload apk
         uses: actions/upload-artifact@v2
@@ -26,16 +43,22 @@ jobs:
           name: debug apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Instrumentation Tests
+      - name: Run UI tests
         id: testing
         uses: reactivecircus/android-emulator-runner@v2
         continue-on-error: false
         with:
-          api-level: 30
+          #emulator-build: 6110076
+          api-level: ${{ matrix.android-apis }}
           target: google_apis
           arch: x86
-#          cores: 4
-#          ram-size: 4096
-#          force-avd-creation: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          emulator-boot-timeout: 120
+#          cores: 6
+#          ram-size: 6144
+#          heap-size: 1024
+#          disk-size: 4086
+#          disable-animations: true
+#          enable-hw-keyboard: false
+         # force-avd-creation: true
+         # emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           script: ./gradlew connectedCheck --stacktrace
