@@ -1,45 +1,42 @@
 trigger:
   - main  # Replace with your branch name
+
 pool:
  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
 variables:
- POSTMAN_API_KEY: 'postman-api-key'  #Generate API-key from locally installed Postman with logged in user and added collection, environment and global variables.
- POSTMAN_COLLECTION_ID: 'path/to/your/postman_collection.json' #Export your collection and set path to folder with it
  POSTMAN_ENVIRONMENT: 'path/to/your/postman_environment.json'  #Export your environment and set path to folder with it
  GLOBALS_FILE_PATH: 'path/to/your/postman_globals.json'  #Export your globals and set path to folder with it
  REPORT_DIR: '$(Build.ArtifactStagingDirectory)/reports'  # Directory where the report will be saved
- POSTMAN: '' #path to installation directory if needed
-
+  
 steps:
 - task: NodeTool@0
   inputs:
-   versionSpec: '22.3.0'  # Specify the Node.js version
+    versionSpec: '22.3.0'  # Specify the Node.js version
   displayName: 'Install Node.js'
 
 - script: |
-  sh 'node -v'
-  sh 'npm -v'
- displayName: 'Verify Node and NPM installation'
+    npm install -g newman
+    npm install -g newman-reporter-html
+  displayName: 'Install Newman and HTML Reporter'
 
--script: |
-  sh 'curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh'
-displayName: 'Install Postman CLI'
+- script: | 
+    newman -v
+  displayName: 'Verify Newman installation'
 
--script: |
-  sh '$POSTMAN --version'
-displayName: 'Verify Postman installation'
+- script: |
+    mkdir -p $(REPORT_DIR)
+    newman run $(POSTMAN_COLLECTION) \
+    --environment=$(POSTMAN_ENVIRONMENT) \
+    --globals=$(GLOBALS_FILE_PATH) \
+    --reporters html,json \
+    --reporter-html-export $(REPORT_DIR)/newman-report.html \
+    --reporter-json-export $(REPORT_DIR)/newman-report.json
+  displayName: 'Run Newman with Postman Collection'
 
--script: |
-  sh 'echo $POSTMAN_API_KEY'
-  sh '$POSTMAN login --with-api-key $POSTMAN_API_KEY'
-displayName: 'Postman login with API key'
-
--script: |
-  // Run the Postman CLI command to execute the collection and save the report
-  sh """
-  $POSTMAN collection run $POSTMAN_COLLECTION_ID \
-  --globals $POSTMAN_GLOBALS_PATH \
-  --environment $POSTMAN_ENVIRONMENT_PATH \
-  """
-displayName: 'Run Postman collection and send report'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(REPORT_DIR)'  # Path to the report directory
+    artifact: 'newman-reports'
+    publishLocation: 'pipeline'
+  displayName: 'Publish Newman Reports'
